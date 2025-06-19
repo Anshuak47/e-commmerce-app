@@ -78,6 +78,18 @@ h2 {
   background-color: #3700b3;
 }
 
+.cart-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-list button.remove {
+  color: white;
+  background-color: red;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+}
 .hidden {
   display: none;
 }

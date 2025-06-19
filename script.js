@@ -56,7 +56,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
         totalPrice += item.price;
         // console.log(item);
         const totalElement = document.createElement("div");
-        totalElement.innerHTML = `${item.name} - $${item.price.toFixed(2)}`;
+        totalElement.classList.add("cart-list");
+        totalElement.innerHTML = `${item.name} - $${item.price.toFixed(
+          2
+        )} <button class="remove" data-id="${item.id}">Remove</button>`;
 
         totalInput.textContent = `${totalPrice.toFixed(2)}`;
         cartItems.append(totalElement);
@@ -64,6 +67,27 @@ document.addEventListener("DOMContentLoaded", function (e) {
     } else {
       cartTotal.classList.add("hidden");
     }
+  }
+
+  // Remove product from cart
+  const removeButton = document.getElementById("cart-items");
+
+  removeButton.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+      const cartId = parseInt(e.target.getAttribute("data-id"));
+
+      const itemId = cart.find((c) => c.id === cartId);
+
+      removeFromCart(itemId);
+    }
+  });
+
+  function removeFromCart(itemId) {
+    const index = cart.findIndex((obj) => obj === itemId);
+    if (index !== -1) {
+      cart.splice(index, 1);
+    }
+    renderTotal();
   }
 
   checkoutButton.addEventListener("click", function (e) {
